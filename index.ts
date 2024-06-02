@@ -41,3 +41,27 @@ function logManyOutput(...messages: string[]) {
   });
 }
 
+// Also, if we are passing an object with many properties to our function, we only need to
+// annotate the object properties that are used in the function. Take a look at this example:
+
+const fruit = {
+  name: 'Apple',
+  color: 'red',
+  sweetness: 80,
+};
+
+function getFruitName({ name }: { name: string }) {
+  return name;
+}
+
+const name_is = getFruitName(fruit);
+
+// Even though our parameter is expecting an object with only the name property,
+// we can still pass it an object with more properties, so long as it includes name.
+
+// Typing function expressions
+
+function mapNumberToNumber(list: number[], callback: (item: number) => number) {
+  // Here type of callback is function which takes a number and returns a number.
+  // The name of parameter in the callback function does not matter. It can be anything.
+}
