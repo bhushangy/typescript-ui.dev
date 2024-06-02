@@ -97,6 +97,7 @@ eatFruit(apple);
 function transformFruit(
   fruitList: string[],
   transformFunction: (item: string) => string
+  // bakeFruit is the transformFunction. Here name of parameter item does not matter. Its only the type of parameter that matters.
 ) {
   return fruitList.map(transformFunction);
 }
