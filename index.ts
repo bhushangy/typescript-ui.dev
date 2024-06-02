@@ -12,3 +12,32 @@ fruitName = 123;
 function printName(name) {
   console.log(name);
 }
+
+// Typing function declarations
+
+// We can also mark parameters as optional by giving them a default value.
+// TypeScript will infer the type of the parameter from the default value.
+
+function logOutput(message: string, yell = true) {
+  // function logOutput(message: string, yell?: boolean) { // This is also correct and more explicit and clear that yell is optional.
+  if (yell) {
+    console.log(message.toUpperCase());
+    return;
+  }
+  console.log(message.toUpperCase());
+}
+
+logOutput('Hey! Listen!'); // "HEY! LISTEN!"
+
+// Rest Parameters
+
+// When we aren't sure how many parameters will be passed to a function, we can use the ... rest syntax,
+// which gives us all of the parameters in a list.
+// If all of the extra parameters are the same type, we can easily add an annotation to the spread parameters.
+
+function logManyOutput(...messages: string[]) {
+  messages.forEach((message) => {
+    logOutput(message);
+  });
+}
+
