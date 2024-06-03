@@ -53,6 +53,7 @@
 
 // const bakedFruit = transformFruit(fruitList, bakeFruit);
 
+// Let typescript infer the type from the value assigned
 let guestCount = 50;
 
 let favoriteDessert = 'Cheesecake';
@@ -85,7 +86,8 @@ const apple = {
   sweetness: 80,
 };
 
-function eatFruit(fruit: { name: string; color: string; sweetness: number }) {
+function eatFruit(fruit: { name: string }) {
+  // You need not add all the properties of the fruit object. Only the properties that are used in the function is enough for type safety.
   if (fruit.name === 'Apple') {
     console.log('I love apples!');
   }
