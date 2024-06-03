@@ -65,3 +65,27 @@ function mapNumberToNumber(list: number[], callback: (item: number) => number) {
   // Here type of callback is function which takes a number and returns a number.
   // The name of parameter in the callback function does not matter. It can be anything.
 }
+
+// Type narrowing
+
+// we can convince TypeScript that an unknown or any value actually has a more specific type by using a process called type narrowing.
+// This involves doing runtime checks which either prove that a value is a specific type or prove that it is not a specific type.
+
+const unknownNumber: unknown = 27;
+
+let theAnswer: number = 0;
+if (typeof unknownNumber === 'number') {
+  theAnswer = 15 + unknownNumber;
+}
+
+// If you remove the if block, typescript will throw an error as the type of unknownNumber is unknown and it cannot be assigned to a number.
+
+// You should always prefer using unknown instead of any if you have the time to add the necessary runtime checks.
+
+async function getFruitList() {
+  const response = await fetch('https://example.com/fruit');
+  const fruitList = await response.json();
+  return fruitList;
+}
+
+// fruitList is of type any. Hence, return type of function is Promise<any>
