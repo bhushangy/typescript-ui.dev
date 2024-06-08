@@ -89,3 +89,45 @@ async function getFruitList() {
 }
 
 // fruitList is of type any. Hence, return type of function is Promise<any>
+
+// Indexable Types
+
+interface Fruit {
+  [key: string]: string;
+  name: string;
+  // calories: number; // This is not allowed as the index signature is already defined.
+  stringCalories: string; // allowed as it is of type string
+}
+
+let myApple: Fruit = {
+  name: 'Apple',
+  ripeness: 'overripe',
+  stringCalories: '95',
+  sdcds: 'sdcds', // This is allowed as the index signature is defined.
+};
+
+// So myApple can have any property as long as it is of type string and it also must contain the name property and stringCalories property.
+
+interface EdibleThing {
+  name: string;
+}
+
+interface Apple extends EdibleThing {
+  color: string;
+}
+
+const apple2: Apple = { name: 'Apple', color: 'red' };
+
+const foodBasket: EdibleThing[] = [];
+foodBasket.push(apple2);
+
+// Since FoodBasket is of type EdibleThing[], it only checks for the name property in the object.
+// It does not check for the color property. So it does not matter if the object has color property or not.
+
+const apple3: EdibleThing = { name: 'Apple', color: 'red' };
+// The above code will throw an error as the color property is not allowed in EdibleThing.
+// So clearly, assigning an object literal to a type is not allowed if the object literal has extra properties.
+
+const apple4: EdibleThing = apple2;
+// The above code is allowed as apple2 is of type Apple which extends EdibleThing.
+// So clearly, assigning an object already created of a subtype to a supertype is allowed.
