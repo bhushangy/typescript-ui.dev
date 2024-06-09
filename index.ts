@@ -131,3 +131,90 @@ const apple3: EdibleThing = { name: 'Apple', color: 'red' };
 const apple4: EdibleThing = apple2;
 // The above code is allowed as apple2 is of type Apple which extends EdibleThing.
 // So clearly, assigning an object already created of a subtype to a supertype is allowed.
+
+// Enums and Tuples
+
+enum Seasons {
+  winter, // 'winter': 0
+  spring, // 'spring': 1
+  summer, // 'summer': 2
+  autumn, // 'autumn': 3
+}
+
+// Our Enum acts like an object, where the strings we include are the property names and their values are incrementing numbers, starting at 0. Notice that when we assign the Enum as a type for a variable, we can use any of the properties of the Enum as values for that variable.
+
+const season: Seasons = Seasons.autumn;
+
+console.log(Seasons);
+// {
+//   '0': 'winter',
+//   '1': 'spring',
+//   '2': 'summer',
+//   '3': 'autumn',
+//   winter: 0,
+//   spring: 1,
+//   summer: 2,
+//   autumn: 3
+// }
+
+// we can see that Enums allow us to both access the numbers using the property names, but also access the property names with the appropriate number index.
+
+console.log(Seasons['0']);
+console.log(Seasons[0]);
+
+// Both are correct
+
+console.log(typeof Seasons.winter); // 0
+// number
+
+enum Colors {
+  red,
+  green,
+  blue,
+}
+let myEnum = Colors.red; // myEnum is of type Colors and not number
+let myNumber: number = myEnum; // This works
+myEnum = 7; // Not possinle since myEnum can only take 0, 1, 2
+
+// let myEnum:number = Colors.red; Here u r explicitly stating that myEnum is number and not Colors.
+// myEnum = 10 This is possible since myEnum is of type number.
+
+enum Colors2 {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
+console.log(Colors2.red); // "red"
+
+console.log(Colors2);
+
+// {
+//     "red": "red",
+//     "green": "green",
+//     "blue": "blue"
+// }
+
+// NOTE - Enums ARE READ ONLY
+
+// Tuple
+
+function simpleUseState(
+  initialState: string
+): [string, (newState: string) => void] {
+  // The rest of the implementation goes here.
+  return ['initialState', (newState) => { }];
+}
+// [string, (newState: string) => void] - Typescript will read this as a tuple since you are explicitly specifying the value of the 2 elements if teh array.
+
+// But if you do not explicitly specify the return type of the function and just do this;
+
+function simpleUseState2(initialState: string) {
+  // The rest of the implementation goes here.
+  return ['initialState', () => { }];
+}
+
+// Typescript assumes that return type will be an array, where each element can be either string or function.
+// (string | (() => void))[]
+
+
