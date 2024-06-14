@@ -216,5 +216,43 @@ function simpleUseState2(initialState: string) {
 
 // Typescript assumes that return type will be an array, where each element can be either string or function.
 // (string | (() => void))[]
+// But we need an array that has first element as string and second element as function
 
+// Literal Types
 
+type Seasonss = 'spring' | 'summer' | 'autumn' | 'winter';
+
+let currentSeason: Seasonss = 'summer';
+let myFavoriteSeason: string = currentSeason; // This is fine since currentSeason is of type Seasons which is of type string
+
+currentSeason = 'fall';
+
+// Intersection and Union types
+
+interface Fruitt {
+  name: string;
+  sweetness: number;
+}
+interface Candy {
+  name: string;
+  sweetness: string;
+}
+type SweetThing = Fruit & Candy;
+
+// sweetness has type never because it cannot have both number and sweetness as types
+
+//Type Aliases
+
+type LinkedList = {
+  head: LinkedListNode;
+  size: () => number;
+  clear: () => void;
+  getFirst: () => LinkedListNode;
+  getLast: () => LinkedListNode;
+};
+type LinkedListNode = {
+  value: string;
+  next?: LinkedListNode;
+};
+
+export { };
