@@ -53,10 +53,10 @@
 
 // const bakedFruit = transformFruit(fruitList, bakeFruit);
 
-// Let typescript infer the type from the value assigned
 let guestCount = 50;
+guestCount = ''; // Not possible due to type inference of number on line 56.
 
-let favoriteDessert = 'Cheesecake';
+let favoriteDessert = 'Cheesecake'; // Type inference of string automatically.s
 
 const ingredients = [
   'butter',
@@ -111,3 +111,5 @@ function bakeFruit(fruitName: string) {
 }
 
 const bakedFruit = transformFruit(fruitList, bakeFruit);
+
+export {};

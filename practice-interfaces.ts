@@ -96,3 +96,5 @@ async function fetchFruitOrUseCache(id: string | number) {
   fruitCache[id] = fruit;
   return fruit;
 }
+
+export {}

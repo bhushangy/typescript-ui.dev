@@ -5,8 +5,8 @@
 // Create a union type that represents either a string or an array of strings
 type StringOrStringArray = string | string[];
 
-const fruitName2: StringOrStringArray = 'Apple';
-const fruitList2: StringOrStringArray = ['Apple', 'Banana', 'Pear'];
+const fruitName: StringOrStringArray = 'Apple';
+const fruitList: StringOrStringArray = ['Apple', 'Banana', 'Pear'];
 
 // Create a union type that represents an array of numbers and strings
 type NumberAndStringArray = (number | string)[];

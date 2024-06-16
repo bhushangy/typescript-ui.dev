@@ -203,7 +203,7 @@ function simpleUseState(
   initialState: string
 ): [string, (newState: string) => void] {
   // The rest of the implementation goes here.
-  return ['initialState', (newState) => { }];
+  return ['initialState', (newState) => {}];
 }
 // [string, (newState: string) => void] - Typescript will read this as a tuple since you are explicitly specifying the value of the 2 elements if teh array.
 
@@ -211,7 +211,7 @@ function simpleUseState(
 
 function simpleUseState2(initialState: string) {
   // The rest of the implementation goes here.
-  return ['initialState', () => { }];
+  return ['initialState', () => {}];
 }
 
 // Typescript assumes that return type will be an array, where each element can be either string or function.
@@ -255,4 +255,4 @@ type LinkedListNode = {
   next?: LinkedListNode;
 };
 
-export { };
+export {};
