@@ -46,3 +46,48 @@ function sayNameLoud3(person: object | Person) {
 sayNameLoud3({ age: 27 });
 sayNameLoud3([]); // Can be any object
 export { };
+
+/* Handling null and undefined */
+
+// Use optional chaining to handle null and undefined values.
+// To assign default values to variables that might be null or undefined, you can use the nullish coalescing operator (??).
+// Use non null assertion operator (!) when you are sure that a variable is not null or undefined at your own risk.
+
+async function makeAPIRequest(url: string, log?: (message: string) => void) {
+    // Optional chaining can be used to conditional execute functions.
+    log?.('Request started.');
+    const response = await fetch(url);
+    const data = await response.json();
+
+    log?.('Request complete.');
+
+    return data;
+}
+
+/* Assertion signatures */
+
+// TypeScript knows the types which are returned by document.getElementById and canvas.getContext, so we should be able to use them without applying any type annotations.
+
+const canvas = document.getElementById('canvas'); // Type here is HTMLElement and not HTMLCanvasElement. But we know that it is a canvas element. Its just that TypeScript doesn't know it.
+const context = canvas.getContext('2d');
+
+// To assert to the type checker that a value has a specific type, we just append the keyword as, followed by the type we want to assert. This tells the TypeScript type checker that a certain value is in fact the type we say it is.
+
+const canvas2 = document.getElementById('canvas') as HTMLCanvasElement;
+const context2 = canvas2.getContext('2d');
+
+// Any time we do this, we run the risk of being wrong and creating type errors which the type checker can't catch for us.
+
+// Note that the type checker will verify that the type we are asserting is at least similar to the original type.
+let fruitName: number = "banana" as number;
+
+// See lesson for assertions signatures for dom elements with intersection types.
+// Suppose you have a type A and another type B that are closely related. Now you are trying to assign a variable to type A. But you know that the variable is of type B.
+// Now how do you assign the variable to type A without changing the type of the variable B ?
+// You can use intersection types to do this. i.e A & {commonProperty: string} will give you a type that has all the properties of A and also the commonProperty property of B.
+
+// See lesson for converting element from one DOM type to another using assertion signatures.
+
+const anchor = document.createElement('a');
+anchor as HTMLElement as HTMLButtonElement;
+// HTMLElement is the parent of both HTMLAnchorElement and HTMLButtonElement. So we can convert anchor to HTMLButtonElement.
