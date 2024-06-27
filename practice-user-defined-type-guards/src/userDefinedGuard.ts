@@ -13,6 +13,7 @@ function isString(maybeString: unknown): maybeString is string {
 
 function isFruit(maybeFruit: unknown): maybeFruit is Fruit {
   if (typeof maybeFruit === 'object' && maybeFruit) {
+    // You have to check for all the props since its of unknown type
     if (
       'sweetness' in maybeFruit &&
       'color' in maybeFruit &&
@@ -51,3 +52,4 @@ function checkFruit(fruit: unknown) {
 
 //   console.log(`This fruit is ${fruit.name}`);
 // }
+
