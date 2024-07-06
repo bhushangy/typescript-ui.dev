@@ -3,7 +3,10 @@
 let fruitName = 'Bhushan';
 
 // Here, typescript complains that the type of fruitName is string and it cannot be assigned a number.
+// This is to ensure type safety and prevent bugs.
+// Even though let allows you to reassign a variable, typescript prevents you from reassigning to a different type making it strictly typed.
 fruitName = 123;
+fruitName = 'tomato';
 
 // noImplicitAny: true
 // The above config does not allow any type to be implicitly inferred as any.
@@ -18,7 +21,7 @@ function printName(name) {
 // We can also mark parameters as optional by giving them a default value.
 // TypeScript will infer the type of the parameter from the default value.
 
-function logOutput(message: string, yell = true) {
+function logOutput(message: string, yell: boolean = true) {
   // function logOutput(message: string, yell?: boolean) { // This is also correct and more explicit and clear that yell is optional.
   if (yell) {
     console.log(message.toUpperCase());
@@ -90,12 +93,12 @@ async function getFruitList() {
 
 // fruitList is of type any. Hence, return type of function is Promise<any>
 
-// Indexable Types
+// Indexable Types - Objects, Arrays, Maps are indexable types cause you need an index to access(key for objects, index for arrays) the value.
 
 interface Fruit {
   [key: string]: string;
   name: string;
-  // calories: number; // This is not allowed as the index signature is already defined.
+  // calories: number; // This is not allowed as the index signature is already defined and it accepts values of type string only.
   stringCalories: string; // allowed as it is of type string
 }
 
@@ -125,12 +128,37 @@ foodBasket.push(apple2);
 // It does not check for the color property. So it does not matter if the object has color property or not.
 
 const apple3: EdibleThing = { name: 'Apple', color: 'red' };
+foodBasket.push({ name: 'Apple', color: 'red' });
 // The above code will throw an error as the color property is not allowed in EdibleThing.
 // So clearly, assigning an object literal to a type is not allowed if the object literal has extra properties.
 
 const apple4: EdibleThing = apple2;
 // The above code is allowed as apple2 is of type Apple which extends EdibleThing.
 // So clearly, assigning an object already created of a subtype to a supertype is allowed.
+
+// Excess Property Checks: When assigning an object literal to a variable, TypeScript performs an extra check to
+// ensure there are no unexpected properties. This helps catch mistakes where an object might have properties that
+// don’t belong to the expected type.
+
+// Structural Typing: TypeScript uses structural typing, meaning types are compatible if their structures match.
+// An instance of a subtype can be assigned to a variable of a supertype because the subtype has all the properties required by the supertype.
+
+// Direct Assignments vs. Variable Assignments: Directly assigning object literals undergoes excess property checks, but assigning variables that are already typed does not.
+
+// Declaration Merging
+
+interface A {
+  name: string;
+}
+interface A {
+  color: string;
+  sweetness: number;
+}
+
+const apple: A = { name: 'apple', color: 'red', sweetness: 80 };
+
+//Interfaces can be declared multiple times with different properties each time. When TypeScript compiles your code, it will combine the two interfaces together, allowing you to use properties from both of them.
+// This is same as extending an interface.
 
 // Enums and Tuples
 
@@ -197,7 +225,7 @@ console.log(Colors2);
 
 // NOTE - Enums ARE READ ONLY
 
-// Tuple
+// Tuple - A fixed length array where each element has a specific type.
 
 function simpleUseState(
   initialState: string

@@ -82,7 +82,7 @@ interface Apple extends MyFruit {
 // Create an interface that represents the data used in this function.
 
 interface FruitCache {
-  [key: string]: MyFruit;
+  [key: string | number]: MyFruit;
 }
 
 const fruitCache: FruitCache = {};
@@ -97,4 +97,4 @@ async function fetchFruitOrUseCache(id: string | number) {
   return fruit;
 }
 
-export {}
+export {};
