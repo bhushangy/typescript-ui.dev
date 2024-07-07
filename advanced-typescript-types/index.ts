@@ -53,7 +53,7 @@ let square2 = { width: 100, height: 100 } as const;
 // readonly makes the properties of the object immutable.
 
 function drawRectangle(rectangle: typeof square2) {
-    // Draw rectangle
+  // Draw rectangle
 }
 
 drawRectangle({ width: 120, height: 100 });
@@ -69,48 +69,48 @@ let message2: 'Hello' = 'Hello';
 message2 = 'Yo';
 
 // Now coming to arrays
-const assortedItems = ['hello', 5, (fruit: string) => { }];
+const assortedItems = ['hello', 5, (fruit: string) => {}];
 // Typescript infers the type of assortedItems as (string | number | ((fruit: Fruit) => void))[]
 // But this a tupple and we want to make sure that the first element is hello, the second is 5 and the third is a function.
 // We can use const assertions to achieve this.
 
-const assortedItems2 = ['hello', 5, (fruit: string) => { }] as const;
+const assortedItems2 = ['hello', 5, (fruit: string) => {}] as const;
 assortedItems2[0]; // type here is "hello"
 assortedItems2[1]; // type here is 5
 
 let msg = 'hello';
 let count = 5;
-const assortedItems4 = [msg, count, (fruit: string) => { }] as const;
+const assortedItems4 = [msg, count, (fruit: string) => {}] as const;
 
 // Now the type is readonly [string, number, (fruit: string) => void]
 // Because msg and count are assigned to variables, they are not inferred as literals because their values can change.
 
 // BUT if msg and count were const, then the type would be readonly ["hello", 5, (fruit: string) => void] since their values can't change.
 
-let assortedItems5 = ['hello', 5, (fruit: string) => { }] as const;
+let assortedItems5 = ['hello', 5, (fruit: string) => {}] as const;
 assortedItems5[0] = 'yo'; // Error: Cannot assign to '0' because it is a read-only property.
 
 /* Advanced Function Typing */
 
 // Typing this keyword in functions when they are used as methods in objects.
 interface IceCreamSundae {
-    baseIceCream: string;
-    chocolateSyrup: number;
-    cherry: boolean;
-    eat: () => void;
+  baseIceCream: string;
+  chocolateSyrup: number;
+  cherry: boolean;
+  eat: () => void;
 }
 const hotFudgeSundae = {
-    baseIceCream: 'vanilla',
-    chocolateSyrup: 5,
-    cherry: true,
-    eat(this: IceCreamSundae) {
-        if (this.cherry) {
-            this.eat();
-            console.log('Mmmm. Tasty.');
-        } else {
-            console.log('Could be better.');
-        }
-    },
+  baseIceCream: 'vanilla',
+  chocolateSyrup: 5,
+  cherry: true,
+  eat(this: IceCreamSundae) {
+    if (this.cherry) {
+      this.eat();
+      console.log('Mmmm. Tasty.');
+    } else {
+      console.log('Could be better.');
+    }
+  },
 };
 
 hotFudgeSundae.eat();
@@ -126,9 +126,13 @@ function stringOrArrayLength(input: string, param1: number): number;
 function stringOrArrayLength(input: unknown[], param1: number): number;
 function stringOrArrayLength(input: unknown[], param1: string): number;
 function stringOrArrayLength(input: any): number {
-    return input.length;
+  return input.length;
 }
 
-stringOrArrayLength({}); // Overload error
+// The last function signature is known as the "implementation signature", and has to match the signature of all of the overloads.
+// It's common to use any for the parameters and narrow the type of each parameter in the function implementation.
 
-export { };
+stringOrArrayLength({}); // Overload error
+// The type of parameter has to match one of the overloads
+
+export {};

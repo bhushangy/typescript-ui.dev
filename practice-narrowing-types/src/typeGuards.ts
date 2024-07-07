@@ -16,7 +16,13 @@ function combineValues(input1: unknown, input2: unknown): string | number {
 function appendToArray(list: unknown, input: unknown): string[] {
   if (!Array.isArray(list)) return [];
 
-  return list.filter((item) => typeof item === 'string').concat(String(input));
+  const filteredList = [];
+  for (const item of list) {
+    if (typeof item === 'string') {
+      filteredList.push(item);
+    }
+  }
+  return filteredList.concat(String(input));
 }
 
 function sumArray(list: unknown) {
@@ -24,7 +30,7 @@ function sumArray(list: unknown) {
     throw new Error('Invalid input !! list is not an array');
   }
 
-  //   const listOfNumbers = list.filter((item) => typeof item === 'number');
+  // const listOfNumbers = list.filter((item) => typeof item === 'number');
   // listOfNumbers is still an array of any time inspite of filtering non numbers
   // But it works in a traditional for loop below
   const listOfNumbers = [];
