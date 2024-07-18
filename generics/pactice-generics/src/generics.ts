@@ -20,7 +20,6 @@ function duplicateList<T>(list: T[], count: number = 1) {
 function createTuple<T, U>(item1: T, item2: U): [T, U] {
   return [item1, item2];
 }
-
 createTuple('asaxsax', 'sdsc');
 // Note here that both T and U are strings.
 // It is not necessary that T and U should be of different type. They can be of the same type as well. They can be of any type.
@@ -34,3 +33,5 @@ function getLength<T extends Length>(item: T): number {
 }
 
 // When u say T extends Length, you are essentially saying that T should be an object that has a length property.
+
+export {};
